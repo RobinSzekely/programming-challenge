@@ -2,9 +2,11 @@ package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.consts.FilePath;
 import de.exxcellent.challenge.controller.AppController;
+import de.exxcellent.challenge.controller.FootballCalc;
 import de.exxcellent.challenge.controller.WeatherCalc;
 import de.exxcellent.challenge.enums.FileContext;
 import de.exxcellent.challenge.models.FileObject;
+import de.exxcellent.challenge.models.Football;
 import de.exxcellent.challenge.models.Weather;
 
 import java.util.ArrayList;
@@ -34,7 +36,12 @@ public final class App {
         String dayWithSmallestTempSpread = ""+ WeatherCalc.dayWithSmallestTemperatureSpread(weatherList);
         System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
 
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
+        /* Use AppController instance to create ArrayList of Football objects */
+        fileObjectList = controller.generateModelList(FilePath.FootballPath,
+                FileContext.FOOTBALL);
+        ArrayList<Football> footballList = fileObjectList.stream().map(football -> (Football) football).
+                collect(Collectors.toCollection(ArrayList::new));
+        String teamWithSmallestGoalSpread = FootballCalc.teamWithSmallestGoalSpread(footballList);
         System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
     }
 }
