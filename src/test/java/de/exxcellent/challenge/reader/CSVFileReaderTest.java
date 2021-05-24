@@ -1,5 +1,6 @@
 package de.exxcellent.challenge.reader;
 
+import de.exxcellent.challenge.consts.FilePath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class CSVFileReaderTest {
     @Test
     @DisplayName("Test for Weather data reading")
     public void readWeatherDataTest() throws IOException {
-        ArrayList<String[]> weatherRows = reader.readFile("src/main/resources/de/exxcellent/challenge/weather.csv",true);
+        ArrayList<String[]> weatherRows = reader.readFile(FilePath.WeatherPath,true);
         assertEquals(30,weatherRows.size());
         assertEquals("1",weatherRows.get(0)[0]);
     }
