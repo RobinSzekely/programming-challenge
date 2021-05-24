@@ -19,6 +19,13 @@ class CSVFileReaderTest {
     }
 
     @Test
+    @DisplayName("Test for empty file reading")
+    public void readEmptyFileTest() throws IOException {
+        ArrayList<String[]> weatherRows = reader.readFile(FilePath.EmptyFilePath,true);
+        assertEquals(0,weatherRows.size());
+    }
+
+    @Test
     @DisplayName("Test for Weather data reading")
     public void readWeatherDataTest() throws IOException {
         ArrayList<String[]> weatherRows = reader.readFile(FilePath.WeatherPath,true);
