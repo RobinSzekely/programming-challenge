@@ -25,7 +25,7 @@ class WeatherCalcTest {
     }
 
     @Test
-    @DisplayName("Test weather calculation with null object")
+    @DisplayName("Test smallest temperature spread method for Weather list")
     public void smallestTemperatureSpreadTest() {
         int result = WeatherCalc.dayWithSmallestTemperatureSpread(weatherList);
         assertEquals(14, result);
