@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * General implementation of the reader interface that explicitly reads CSV files
+ */
 public class CSVFileReader implements Reader {
 
     private final Logger LOGGER =  Logger.getLogger(CSVFileReader.class.getName());
