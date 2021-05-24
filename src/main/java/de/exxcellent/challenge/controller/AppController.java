@@ -2,6 +2,7 @@ package de.exxcellent.challenge.controller;
 
 import de.exxcellent.challenge.enums.FileContext;
 import de.exxcellent.challenge.models.FileObject;
+import de.exxcellent.challenge.models.Football;
 import de.exxcellent.challenge.models.Weather;
 import de.exxcellent.challenge.reader.CSVFileReader;
 import de.exxcellent.challenge.reader.Reader;
@@ -26,6 +27,13 @@ public class AppController {
         try {
             ArrayList<String[]> contents = reader.readFile(path,true);
             switch(fileContext) {
+                case FOOTBALL:
+                    /* Construct minimal Football object for each read row */
+                    return contents.stream().
+                            map(football -> new Football(football[0],
+                                    Integer.parseInt(football[5]),
+                                    Integer.parseInt(football[6]))).
+                            collect(Collectors.toCollection(ArrayList::new));
                 case WEATHER:
                     /* Construct minimal Weather object for each read row */
                     return contents.stream().

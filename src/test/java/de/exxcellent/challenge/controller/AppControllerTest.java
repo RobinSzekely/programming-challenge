@@ -3,6 +3,7 @@ package de.exxcellent.challenge.controller;
 import de.exxcellent.challenge.consts.FilePath;
 import de.exxcellent.challenge.enums.FileContext;
 import de.exxcellent.challenge.models.FileObject;
+import de.exxcellent.challenge.models.Football;
 import de.exxcellent.challenge.models.Weather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -39,5 +40,17 @@ class AppControllerTest {
                 collect(Collectors.toCollection(ArrayList::new));
         assertEquals(30,weatherList.size());
         assertEquals(1,weatherList.get(0).getDay());
+    }
+
+    @Test
+    @DisplayName("Test ArrayList for Football objects and correct size")
+    public void FootballArrayListTest() {
+        ArrayList<FileObject> modelList = appController.generateModelList(FilePath.FootballPath,
+                FileContext.FOOTBALL);
+        /* cast ArrayList from FileObject to Weather objects */
+        ArrayList<Football> footballList = modelList.stream().map(football -> (Football) football).
+                collect(Collectors.toCollection(ArrayList::new));
+        assertEquals(20,footballList.size());
+        assertEquals("Arsenal",footballList.get(0).getTeam());
     }
 }
