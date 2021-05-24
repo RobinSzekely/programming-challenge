@@ -1,6 +1,7 @@
 package de.exxcellent.challenge.controller;
 
 import de.exxcellent.challenge.consts.FilePath;
+import de.exxcellent.challenge.enums.FileContext;
 import de.exxcellent.challenge.models.FileObject;
 import de.exxcellent.challenge.models.Weather;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +24,16 @@ class AppControllerTest {
     @Test
     @DisplayName("Test for summarizing read CSV in FileObject ArrayList")
     public void FileObjectArrayListTest() {
-        ArrayList<FileObject> modelList = appController.generateModelList(FilePath.WeatherPath);
+        ArrayList<FileObject> modelList = appController.generateModelList(FilePath.WeatherPath,
+                FileContext.WEATHER);
         assertEquals(30,modelList.size());
     }
 
     @Test
     @DisplayName("Test ArrayList for cast to Weather objects and correct size")
     public void WeatherArrayListTest() {
-        ArrayList<FileObject> modelList = appController.generateModelList(FilePath.WeatherPath);
+        ArrayList<FileObject> modelList = appController.generateModelList(FilePath.WeatherPath,
+                FileContext.WEATHER);
         /* cast ArrayList from FileObject to Weather objects */
         ArrayList<Weather> weatherList = modelList.stream().map(weather -> (Weather) weather).
                 collect(Collectors.toCollection(ArrayList::new));

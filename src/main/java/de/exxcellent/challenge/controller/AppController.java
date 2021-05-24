@@ -1,5 +1,6 @@
 package de.exxcellent.challenge.controller;
 
+import de.exxcellent.challenge.enums.FileContext;
 import de.exxcellent.challenge.models.FileObject;
 import de.exxcellent.challenge.models.Weather;
 import de.exxcellent.challenge.reader.CSVFileReader;
@@ -20,16 +21,20 @@ public class AppController {
      * @param path given path to the file to read
      * @return ArrayList of model
      */
-    public ArrayList<FileObject> generateModelList(String path) {
+    public ArrayList<FileObject> generateModelList(String path, FileContext fileContext) {
         Reader reader = new CSVFileReader();
         try {
             ArrayList<String[]> contents = reader.readFile(path,true);
-            /* Returns minimal Weather object */
-            return contents.stream().
-                    map(weather -> new Weather(Integer.parseInt(weather[0]),
-                            Integer.parseInt(weather[1]),
-                            Integer.parseInt(weather[2]))).
-                    collect(Collectors.toCollection(ArrayList::new));
+            switch(fileContext) {
+                case WEATHER:
+                    /* Construct minimal Weather object for each read row */
+                    return contents.stream().
+                            map(weather -> new Weather(Integer.parseInt(weather[0]),
+                                    Integer.parseInt(weather[1]),
+                                    Integer.parseInt(weather[2]))).
+                            collect(Collectors.toCollection(ArrayList::new));
+                // new cases can be added here for new CSV/JSON/... files
+            }
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Unable to open file", e);
         } catch(NullPointerException e) {
